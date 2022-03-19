@@ -1,5 +1,6 @@
 package application;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -38,10 +39,17 @@ public class Program {
 				if (capturedPiece != null) {
 					captured.add(capturedPiece);
 				}
-				
-				if(chessMatch.getPromoted() != null) {
-					System.out.print("Enter piece for promotion (B/N/R/Q):");
-					String type = sc.nextLine();
+
+				if (chessMatch.getPromoted() != null) {
+					String type = null;
+					int cont = 0;
+					do {
+						if (cont > 0)
+							System.out.println("Invalid Value!!!");
+						System.out.print("Enter piece for promotion (B/N/R/Q):");
+						type = sc.nextLine().toUpperCase();
+						cont++;
+					} while (!type.equals("B") && !type.equals("N") && !type.equals("R") && !type.equals("Q"));
 					chessMatch.replacePromotedPiece(type);
 				}
 
